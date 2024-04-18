@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: abhi_2024-03-23
+      author: abhishek
+      objectQuotingStrategy: LEGACY
+      comment: add other tables
+      contexts:
+      labels:
+      changes:
+        - sqlFile:
+            dbms: mysql
+            encoding: UTF-8
+            path: 00002_init_db.sql
+            relativeToChangelogFile: true
