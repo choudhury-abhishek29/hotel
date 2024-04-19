@@ -8,7 +8,9 @@ application lets you perform the following operations:
 
 Following is a description of each of the above operations and how to perform them.
 
-#### 1. Add a Hotel
+#### 1. Hotel Endpoints
+
+##### 1.1 Add a Hotel
 This is the first step to perform before using the application. The _username_ and _password_ are used for all the subsequesnt requests for authentication.
 
 API Endpoint
@@ -40,10 +42,42 @@ Response
 ```json
 Hotel added : Hotel Marina:2
 ```
-#### 2. Get all Hotels
+#### 1.2. Get details of a single hotel
+This call returns the following details of a single hotel:
+ - id
+ - adddress
+ - count of different types of rooms in the hotel
+   
+API Endpoint
+   ```GET /hotel/<id>```
+
+Response
+```json
+{
+   "id": 2,
+   "name": "Hotel Marina",
+   "address": {
+      "id": 1,
+      "line1": "23 Marina Way",
+      "line2": null,
+      "city": "Richmond",
+      "state": "CA",
+      "country": "USA",
+      "zip": 94804,
+      "type": "HOTEL"
+   },
+   "roomCounts": {
+      "DOUBLE": 2,
+      "SINGLE": 4,
+      "SUITE": 1
+   }
+}
+```
+
+#### 1.3. Get all Hotels
 This call returns a list of all the Hotels and its properties like Address and Room details
 API Endpoint
-```GET /hotels```
+```GET /hotel/all```
 
 Response
 ```json
@@ -52,23 +86,6 @@ Response
       "id": 1,
       "name": "Grand Bay New",
       "address": null,
-      "rooms": [
-         {
-            "id": 1,
-            "type": "SINGLE",
-            "status": "AVAILABLE"
-         },
-         {
-            "id": 2,
-            "type": "DOUBLE",
-            "status": "AVAILABLE"
-         },
-         {
-            "id": 3,
-            "type": "SUITE",
-            "status": "AVAILABLE"
-         }
-      ],
       "roomCounts": {
          "DOUBLE": 1,
          "SINGLE": 1,
@@ -88,43 +105,6 @@ Response
          "zip": 94804,
          "type": "HOTEL"
       },
-      "rooms": [
-         {
-            "id": 4,
-            "type": "SINGLE",
-            "status": "AVAILABLE"
-         },
-         {
-            "id": 5,
-            "type": "SINGLE",
-            "status": "AVAILABLE"
-         },
-         {
-            "id": 6,
-            "type": "SINGLE",
-            "status": "AVAILABLE"
-         },
-         {
-            "id": 7,
-            "type": "SINGLE",
-            "status": "AVAILABLE"
-         },
-         {
-            "id": 8,
-            "type": "DOUBLE",
-            "status": "AVAILABLE"
-         },
-         {
-            "id": 9,
-            "type": "DOUBLE",
-            "status": "AVAILABLE"
-         },
-         {
-            "id": 10,
-            "type": "SUITE",
-            "status": "AVAILABLE"
-         }
-      ],
       "roomCounts": {
          "DOUBLE": 2,
          "SINGLE": 4,

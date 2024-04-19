@@ -47,20 +47,6 @@ public class HotelService {
         response.setAddress(h.getAddress());
         response.setRoomCounts(countRooms(h.getRooms()));
         return response;
-
-
-
-//        if(h!=null){
-//            response.setId(h.getId());
-//            response.setName(h.getName());
-//            response.setAddress(h.getAddress());
-//            response.setRoomCounts(countRooms(h.getRooms()));
-//            return response;
-//        }
-
-
-
-
     }
 
     public String addHotel(Hotel hotel)
