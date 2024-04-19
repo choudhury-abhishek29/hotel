@@ -15,8 +15,8 @@ public class HotelController {
 
     private final HotelService hotelService;
 
-//    @Autowired
-//    private Hotel hotel;
+    @Autowired
+    private Hotel hotel;
 
     @Autowired
     public HotelController(HotelService hotelService)
@@ -33,11 +33,14 @@ public class HotelController {
         return hotelService.getHotel(hotelId);
 
     }
+    @DeleteMapping(path = "/{hotelId}")
+    public String deleteHotel(@PathVariable("hotelId") Long hotelId){
+        return hotelService.deleteHotel(hotelId);
+    }
 
 
     @PostMapping(path = "/")
     public String addHotel(@RequestBody HotelRequest request){
-        Hotel hotel = new Hotel();
         hotel.setName(request.getName());
         hotel.setAddress(request.getAddress());
         hotel.setRooms(request.getRooms());

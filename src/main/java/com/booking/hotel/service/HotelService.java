@@ -49,11 +49,17 @@ public class HotelService {
         return response;
     }
 
-    public String addHotel(Hotel hotel)
-    {
+    public String addHotel(Hotel hotel) {
         Hotel savedHotel = hotelRepository.save(hotel);
-
         return "Hotel added : "+savedHotel.getName()+":"+savedHotel.getId();
+    }
+
+    public String deleteHotel(Long hotelId) {
+        Optional<Hotel> oh = hotelRepository.findById(hotelId);
+        Hotel h = oh.orElseThrow(()-> new HotelNotFoundException(ExceptionMessages.HOTEL_NOT_FOUND.getValue(), ExceptionMessages.HOTEL_NOT_FOUND.getStatus()));
+
+        hotelRepository.deleteById(hotelId);
+        return "Hotel with id : "+hotelId+" deleted";
     }
 
     private HashMap<ROOM_TYPE, Integer> countRooms(List<Room> rooms){

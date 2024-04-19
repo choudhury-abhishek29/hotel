@@ -1,16 +1,13 @@
 package com.booking.hotel.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.ColumnDefault;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Data
@@ -19,6 +16,8 @@ import java.util.List;
 @ToString
 @Entity
 @Table
+@Component
+@Scope(value = "prototype")
 public class Hotel {
     @Id
     @SequenceGenerator( name = "hotel_id_sequence", sequenceName = "hotel_id_sequence", allocationSize = 1)
