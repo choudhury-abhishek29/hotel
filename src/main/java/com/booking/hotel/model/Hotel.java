@@ -49,6 +49,6 @@ public class Hotel {
 //    @OneToMany(mappedBy = "hotel")
     List<Room> rooms;
 
-    @Transient
-    HashMap<ROOM_TYPE, Integer> roomCounts;
+//    @Transient
+//    HashMap<ROOM_TYPE, Integer> roomCounts;
 }

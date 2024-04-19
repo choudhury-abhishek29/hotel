@@ -1,18 +1,16 @@
 package com.booking.hotel.controller;
 
 import com.booking.hotel.dto.HotelRequest;
+import com.booking.hotel.dto.HotelResponse;
 import com.booking.hotel.model.Hotel;
-import com.booking.hotel.model.Room;
 import com.booking.hotel.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/hotel")
 public class HotelController {
 
     private final HotelService hotelService;
@@ -26,15 +24,19 @@ public class HotelController {
         this.hotelService = hotelService;
     }
 
-    @GetMapping(path = "hotels")
-    public List<Hotel> getAllHotels()
-    {
+    @GetMapping(path = "/all")
+    public List<HotelResponse> getAllHotels(){
         return hotelService.getAllHotels();
     }
+    @GetMapping(path = "/{hotelId}")
+    public HotelResponse getHotel(@PathVariable("hotelId") Long hotelId) {
+        return hotelService.getHotel(hotelId);
 
-    @PostMapping(path = "/hotel")
-    public String addHotel(@RequestBody HotelRequest request)
-    {
+    }
+
+
+    @PostMapping(path = "/")
+    public String addHotel(@RequestBody HotelRequest request){
         Hotel hotel = new Hotel();
         hotel.setName(request.getName());
         hotel.setAddress(request.getAddress());
