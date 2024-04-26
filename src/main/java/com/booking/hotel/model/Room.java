@@ -1,6 +1,7 @@
 package com.booking.hotel.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,9 +26,10 @@ public class Room {
     )
     Long id;
 
-//    @ManyToOne(targetEntity = Hotel.class, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "hotel_id")
-//    Hotel hotel;
+    @ManyToOne(targetEntity = Hotel.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "hotel_id", insertable=false, updatable=false)
+    @JsonBackReference("hotel_id")
+    Hotel hotel;
 
     @Enumerated(EnumType.STRING)
     ROOM_TYPE type;

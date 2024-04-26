@@ -1,5 +1,7 @@
 package com.booking.hotel.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,8 +46,9 @@ public class Hotel {
 
     @OneToMany(targetEntity=Room.class, cascade = CascadeType.ALL,fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "hotel_id", referencedColumnName = "id")
+    @JsonManagedReference("hotel_id")
 //    @JsonIgnore
-//    @OneToMany(mappedBy = "hotel")
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = CascadeType.ALL)
     List<Room> rooms;
 
 //    @Transient

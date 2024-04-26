@@ -1,8 +1,10 @@
 package com.booking.hotel.service;
 
+import com.booking.hotel.dto.HotelRequest;
 import com.booking.hotel.dto.HotelResponse;
 import com.booking.hotel.exception.ExceptionMessages;
 import com.booking.hotel.exception.hotel.HotelNotFoundException;
+import com.booking.hotel.model.Address;
 import com.booking.hotel.model.Hotel;
 import com.booking.hotel.model.ROOM_TYPE;
 import com.booking.hotel.model.Room;
@@ -19,6 +21,7 @@ import java.util.Optional;
 public class HotelService {
 
     private final HotelRepository hotelRepository;
+    private final AddressService addressService;
 
     @Autowired
     private HotelResponse response;
@@ -28,6 +31,7 @@ public class HotelService {
     @Autowired
     public HotelService(HotelRepository hotelRepository, AddressService addressService, RoomService roomService) {
         this.hotelRepository = hotelRepository;
+        this.addressService = addressService;
     }
     public List<HotelResponse> getAllHotels() {
         List<Hotel> allHotels = hotelRepository.findAll();
@@ -60,6 +64,25 @@ public class HotelService {
 
         hotelRepository.deleteById(hotelId);
         return "Hotel with id : "+hotelId+" deleted";
+    }
+
+    public String updateHotel(HotelRequest hotelUpdates, Long hotelId){
+        Hotel hotel =  hotelRepository.findById(hotelId).get();
+        if(hotelUpdates.getName()!=null)
+            hotel.setName(hotelUpdates.getName());
+
+        if(hotelUpdates.getAddress()!=null){
+            Address address = addressService.getAddress(hotel.getAddress().getId()).get();
+            addressService.updateAddress(hotelUpdates.getAddress(), address.getId());
+        }
+
+
+        if(hotelUpdates.getRooms()!=null)
+            hotel.setRooms(hotelUpdates.getRooms());
+
+        Hotel savedHotel = hotelRepository.save(hotel);
+
+        return "Hotel updated : "+savedHotel.getName()+":"+savedHotel.getId();
     }
 
     private HashMap<ROOM_TYPE, Integer> countRooms(List<Room> rooms){

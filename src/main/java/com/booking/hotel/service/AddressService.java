@@ -21,4 +21,22 @@ public class AddressService {
     }
 
     public Long saveAddress(Address address) { return addressRepository.save(address).getId(); }
+
+    public Address updateAddress(Address newAddress, Long addressId) {
+        Address address = getAddress(addressId).get();//addressRepository.findById(addressId).get();
+        if(newAddress.getLine1()!=null)
+            address.setLine1(newAddress.getLine1());
+        if(newAddress.getLine2()!=null)
+            address.setLine2(newAddress.getLine2());
+        if(newAddress.getCity()!=null)
+            address.setCity(newAddress.getCity());
+        if(newAddress.getState()!=null)
+            address.setState(newAddress.getState());
+        if(newAddress.getCountry()!=null)
+            address.setCountry(newAddress.getCountry());
+        if(newAddress.getZip()!=null)
+            address.setZip(newAddress.getZip());
+
+        return addressRepository.save(address);
+    }
 }

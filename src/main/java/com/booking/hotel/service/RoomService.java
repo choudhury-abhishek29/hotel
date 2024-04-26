@@ -19,4 +19,12 @@ public class RoomService {
     public List<Room> saveRooms(List<Room> rooms){
         return roomRepository.saveAll(rooms);
     }
+
+    public Room getRoomByRoomId(Long roomId){
+        return roomRepository.findById(roomId).get();
+    }
+
+    public List<Room> getRoomByHotelId(Long hotelId){
+        return roomRepository.findByHotelId(hotelId);
+    }
 }
