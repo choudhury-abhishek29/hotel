@@ -6,7 +6,8 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public enum ExceptionMessages {
-    HOTEL_NOT_FOUND("Hotel Not Found", HttpStatus.NOT_FOUND);
+    HOTEL_NOT_FOUND("Hotel Not Found", HttpStatus.NOT_FOUND),
+    ROOM_NOT_FOUND("Room Not Found", HttpStatus.NOT_FOUND);
 
     private final String value;
     private final HttpStatus status;
